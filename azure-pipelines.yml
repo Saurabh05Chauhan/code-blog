@@ -22,5 +22,5 @@ steps:
   displayName: 'npm install and build'
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: 'dist'  # Path to your dist folder
+    PathtoPublish: 'dist/code-blog/browser'  # Path to your dist folder
     ArtifactName: 'drop'
