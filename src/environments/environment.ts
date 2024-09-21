@@ -1,3 +1,3 @@
 export const environment = {
-    apiBaseUrl:'http://localhost:5248/api/',
+    apiBaseUrl:'https://codeblogapidev-d8cgcxamgaawcsdt.canadacentral-01.azurewebsites.net/api/',
 };
