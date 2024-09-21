@@ -11,16 +11,17 @@ export class AuthGuardService implements CanActivate  {
 
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    if(this.signalService.LoginStatus()=='true'){
-      return true;
-    }
-    else{
-      this.router.navigate(['/login'], {
-        queryParams: {
-          returnUrl: state.url
-        }
-      });
-      return false;
-    }
+    return true;
+    // if(this.signalService.LoginStatus()=='true'){
+    //   return true;
+    // }
+    // else{
+    //   this.router.navigate(['/login'], {
+    //     queryParams: {
+    //       returnUrl: state.url
+    //     }
+    //   });
+    //   return false;
+    // }
   }
 }
