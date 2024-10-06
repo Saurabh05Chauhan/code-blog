@@ -5,18 +5,19 @@ import { Observable } from 'rxjs';
 import { BlogPost } from '../../blog-post/Models/Blog-Post';
 import { CommonModule } from '@angular/common';
 import { MarkdownModule } from 'ngx-markdown';
-
+import { NgxLoadingModule } from "ngx-loading";
 @Component({
   selector: 'app-blog-details',
   standalone: true,
-  imports: [CommonModule,MarkdownModule],
+  imports: [CommonModule,MarkdownModule,NgxLoadingModule],
   templateUrl: './blog-details.component.html',
   styleUrl: './blog-details.component.css'
 })
 export class BlogDetailsComponent implements OnInit{
 
   url:string| null =null;
-  blog$?:Observable<BlogPost>;
+  blog$?:BlogPost;
+loading: boolean=true;
   constructor( private route:ActivatedRoute, private blogService:BlogPostService){
 
   }
@@ -34,7 +35,11 @@ export class BlogDetailsComponent implements OnInit{
 
   //Fetch blog details by url
   getBlogbyUrl(url:string){
-    this.blog$=this.blogService.GetBlogPostByURL(url);
+    this.loading=true;
+    this.blogService.GetBlogPostByURL(url).subscribe((res)=>{
+      this.blog$=res;
+      this.loading=false;
+    });
   }
 
 }

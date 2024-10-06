@@ -12,13 +12,14 @@ import { CategoryService } from '../../Category/Services/category.service';
 import { EditBlogPost } from '../Models/Edit-BlogPosts';
 import { ImageSelectorComponent } from "../../../shared/components/image-selector/image-selector.component";
 import { ImageService } from '../../../shared/components/image-selector/image.service';
+import { NgxLoadingModule } from 'ngx-loading';
 
 @Component({
     selector: 'app-edit-blog-post',
     standalone: true,
     templateUrl: './edit-blog-post.component.html',
     styleUrl: './edit-blog-post.component.css',
-    imports: [FormsModule, DatePipe, MarkdownModule, CommonModule, ImageSelectorComponent]
+    imports: [FormsModule, DatePipe, MarkdownModule, CommonModule, ImageSelectorComponent,NgxLoadingModule]
 })
 export class EditBlogPostComponent implements OnInit,OnDestroy{
 
@@ -34,24 +35,26 @@ export class EditBlogPostComponent implements OnInit,OnDestroy{
   categories$?:Observable<category[]>;
   selectedCategory?:string[];
   isImageSelectorVisible:boolean=false;
+loading: boolean=true;
   constructor(private router:ActivatedRoute,private service:BlogPostService,private categoryService:CategoryService,private route:Router,private imgService:ImageService){
     this.model={
-      id:"",
-      title:"",
-    shortDescription:"",
-    content:"",
-    featuredImageURL:"",
-    urlHandle:"",
-    author:"",
-    publishedDate:new Date(),
-    isVisible:true,
-    categories:[]
+      Id:"",
+      Title:"",
+    ShortDescription:"",
+    Content:"",
+    FeaturedImageURL:"",
+    UrlHandle:"",
+    Author:"",
+    PublishedDate:new Date(),
+    IsVisible:true,
+    Categories:[]
 
     }
   }
   
 
   ngOnInit(): void {
+    this.loading=true;
     this.categories$=this.categoryService.getCategoryList();
     this.params=this.router.paramMap.subscribe({
       next:(params)=>{
@@ -61,7 +64,8 @@ export class EditBlogPostComponent implements OnInit,OnDestroy{
             next:(res)=>{
               console.log(res);
               this.model=res;
-              this.selectedCategory=res.categories.map(x=>x.id);
+              this.selectedCategory=res.Categories.map(x=>x.Id);
+              this.loading=false;
             }
           })
         }
@@ -69,7 +73,7 @@ export class EditBlogPostComponent implements OnInit,OnDestroy{
         this.imageSelected=this.imgService.onSelectImage().subscribe({
           next:(res)=>{
             if(this.model){
-              this.model.featuredImageURL=res;
+              this.model.FeaturedImageURL=res;
               this.openImageSelector();
             }
           }
@@ -83,34 +87,35 @@ export class EditBlogPostComponent implements OnInit,OnDestroy{
     debugger
     this.selectedCategory;
     this.requestModel={
-      id:this.model.id,
-      title:this.model.title,
-    shortDescription:this.model.shortDescription,
-    content:this.model.content,
-    featuredImageURL:this.model.featuredImageURL,
-    urlHandle:this.model.urlHandle,
-    author:this.model.author,
-    publishedDate:this.model.publishedDate,
-    isVisible:this.model.isVisible,
+      Id:this.model.Id,
+      Title:this.model.Title,
+    ShortDescription:this.model.ShortDescription,
+    Content:this.model.Content,
+    FeaturedImageURL:this.model.FeaturedImageURL,
+    UrlHandle:this.model.UrlHandle,
+    Author:this.model.Author,
+    PublishedDate:this.model.PublishedDate,
+    IsVisible:this.model.IsVisible,
     Categories:this.selectedCategory ?? [ ]
 
     }
-
-    this.updateBlogparams=this.service.UpdateBlogPost(this.requestModel).subscribe({
-      next:(res)=>{
+    this.loading=true;
+    this.updateBlogparams=this.service.UpdateBlogPost(this.requestModel).subscribe((res)=>{
+      
+        debugger
         this.model=res;
-        this.selectedCategory=res.categories.map(x=>x.id);
+        // console.log(res);
+        // this.selectedCategory=res.Categories.map(x=>x.Id);
+        this.loading=false;
         this.route.navigateByUrl('/admin/blogposts');
-      }
+      
     })
   }
 
   deleteBlog(id: string) {
-    this.deleteBlogparams=this.service.DeleteBlog(id).subscribe({
-      next:(res)=>{
+    this.deleteBlogparams=this.service.DeleteBlog(id).subscribe((res)=>{
         this.route.navigateByUrl('/admin/blogposts');
-      }
-    })
+      })
     }
 
     openImageSelector() {

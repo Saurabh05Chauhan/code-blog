@@ -1,10 +1,14 @@
+<ngx-loading
+    [show]="loading"
+    [config]="{ backdropBorderRadius: '3px' }"
+  ></ngx-loading>
 <div class="container">
     <H1 class="mt-3">Blogpost List</H1>
     <div class="d-flex justify-content-end mt-3">
         <a [routerLink]="['/admin/blogposts/add']" class="btn btn-primary" >Add BlogPosts</a>
     </div>
 
-    @if (model | async) {
+    @if (model ) {
         <table class="table table-bordered mt-3">
             <thead>
                 <tr>
@@ -16,19 +20,19 @@
                 </tr>
             </thead>
             <tbody>
-                    @for (item of model | async; track $index) {
+                    @for (item of model ; track $index) {
                         <tr>
-                            <td>{{item.title}}</td>
-                            <td>{{item.shortDescription}}</td>
-                            <td> {{item.isVisible}}</td>
+                            <td>{{item.Title}}</td>
+                            <td>{{item.ShortDescription}}</td>
+                            <td> {{item.IsVisible}}</td>
                             <td>
-                            @for (x of item.categories; track $index) 
+                            @for (x of item.Categories; track $index) 
                             {
-                                <span class="badge bg-secondary me-2">{{x.name}}</span>
+                                <span class="badge bg-secondary me-2">{{x.Name}}</span>
                             }
                         </td>
                         <td>
-                            <a [routerLink]="['/admin/blogposts',item.id]" class="btn btn-light">Edit</a>
+                            <a [routerLink]="['/admin/blogposts',item.Id]" class="btn btn-light">Edit</a>
                         </td>
                         </tr>
                     }

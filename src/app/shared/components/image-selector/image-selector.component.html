@@ -11,10 +11,10 @@
                     <div class="d-flex flex-wrap">
                     @for (item of images$ | async; track $index) {
                     <div style="min-width: 100px;justify-content: center;cursor: pointer;" class="me-1 bg-white d-flex align-items-center flex-column border p-3"
-                    (click)="onImageClick(item.url)">
+                    (click)="onImageClick(item.Url)">
                         
-                            <img [src]="item.url" [title]="item.title" style="height: 100px;">
-                            <span class="mt-1">{{item.title}}</span>
+                            <img [src]="item.Url" [title]="item.Title" style="height: 100px;">
+                            <span class="mt-1">{{item.Title}}</span>
                         </div>
                     }</div>
                 }

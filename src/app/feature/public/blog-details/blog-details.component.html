@@ -1,27 +1,30 @@
-
-@if (blog$ | async; as blog) {
+<ngx-loading
+    [show]="loading"
+    [config]="{ backdropBorderRadius: '3px' }"
+  ></ngx-loading>
+@if (blog$ ; as blog) {
     <!-- <h1>{{blog.title}}</h1> -->
     <div class="container">
         <div class="py-5">
             <div class="col-12 col-md-8 col-lg-6 mx-auto">
-                <img [src]="blog.featuredImageURL" [alt]="blog.title" class="img-fluid">
-                <h1 class="mt-4">{{blog.title}}</h1>
+                <img [src]="blog.FeaturedImageURL" [alt]="blog.Title" class="img-fluid">
+                <h1 class="mt-4">{{blog.Title}}</h1>
                 <div class="d-flex justify-content-between mt-4">
-                    <span>{{blog.author}}</span>
-                    <span>{{blog.publishedDate | date:'dd-MM-yyyy'}}</span>
+                    <span>{{blog.Author}}</span>
+                    <span>{{blog.PublishedDate | date:'dd-MM-yyyy'}}</span>
                 </div>
                 
-                @if (blog.categories) {
-                    @for (cat of blog.categories; track $index) {
+                @if (blog.Categories) {
+                    @for (cat of blog.Categories; track $index) {
                         <span class="badge bg-secondary me-2">
-                            {{cat.name}}
+                            {{cat.Name}}
                         </span>
                     }
                     
                 }
 
                 <div class="mt-4 blog-content">
-                    <markdown [data]="blog.content"></markdown>
+                    <markdown clipboard [data]="blog.Content"></markdown>
                 </div>
             
             </div>

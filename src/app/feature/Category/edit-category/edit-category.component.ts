@@ -20,9 +20,9 @@ export class EditCategoryComponent implements OnInit,OnDestroy{
   categoryModel:category;
   constructor(private router:ActivatedRoute,private service:CategoryService,private route:Router){
     this.categoryModel={
-      id:"",
-      urlHandle:"",
-      name:""
+      Id:"",
+      UrlHandle:"",
+      Name:""
     }
   }
   

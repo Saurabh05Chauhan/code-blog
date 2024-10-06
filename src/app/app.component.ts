@@ -11,5 +11,5 @@ import { NavbarComponent } from "./core/components/navbar/navbar.component";
     imports: [CommonModule, RouterOutlet, NavbarComponent]
 })
 export class AppComponent {
-  title = 'code-blog';
+  title = 'myCode-blog';
 }

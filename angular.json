@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "code-blog": {
+    "myCode-blog": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/code-blog",
+            "outputPath": "dist/myCode-blog",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -31,7 +31,8 @@
             "scripts": [
               "node_modules/prismjs/prism.js",
               "node_modules/prismjs/components/prism-csharp.min.js", 
-              "node_modules/prismjs/components/prism-css.min.js" 
+              "node_modules/prismjs/components/prism-css.min.js" ,
+              "node_modules/clipboard/dist/clipboard.min.js"
             ]
           },
           "configurations": {
@@ -68,10 +69,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "code-blog:build:production"
+              "buildTarget": "myCode-blog:build:production"
             },
             "development": {
-              "buildTarget": "code-blog:build:development"
+              "buildTarget": "myCode-blog:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -79,7 +80,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "code-blog:build"
+            "buildTarget": "myCode-blog:build"
           }
         },
         "test": {

@@ -39,13 +39,13 @@
                 <tbody>
                         @for (item of categories$ | async; track $index) {
                             <tr>
-                                <td>{{item.id}}</td>
-                                <td>{{item.name}}</td>
-                                <td> {{item.urlHandle}}</td>
+                                <td>{{item.Id}}</td>
+                                <td>{{item.Name}}</td>
+                                <td> {{item.UrlHandle}}</td>
                                 <td>
-                                    <a [routerLink]="['/admin/categories',item.id]" class="btn btn-light">Edit</a> |
+                                    <a [routerLink]="['/admin/categories',item.Id]" class="btn btn-light">Edit</a> |
 
-                                    <button class="btn btn-danger btn-sm" (click)="delete(item.id)"> Delete</button>
+                                    <button class="btn btn-danger btn-sm" (click)="delete(item.Id)"> Delete</button>
                                 </td>
                             </tr>
                         }
@@ -53,7 +53,7 @@
                 </tbody>
             </table>
 
-            <nav aria-label="Page navigation example">
+            <!-- <nav aria-label="Page navigation example">
                 <ul class="pagination">
                   <li class="page-item">
                     <a class="page-link" (click)="getPrevPage()" aria-label="Previous">
@@ -71,7 +71,7 @@
                     </a>
                   </li>
                 </ul>
-              </nav>
+              </nav> -->
         }
         
     </div>

@@ -20,8 +20,8 @@ export class CategoryListComponent implements OnInit,OnDestroy {
   categories$:Observable<category[]>|undefined;
   deleteSub?:Subscription;
   totalCount?:number;
-  pageNumber:number=1;
-  pageSize:number=2;
+  lastVisible?:string;
+  pageSize:number=10;
   list:number[]=[];
   constructor(private service:CategoryService){
 
@@ -37,7 +37,7 @@ export class CategoryListComponent implements OnInit,OnDestroy {
           undefined,
           undefined,
           undefined,
-          this.pageNumber,
+          this.lastVisible,
           this.pageSize
         );
 
@@ -64,32 +64,32 @@ export class CategoryListComponent implements OnInit,OnDestroy {
     }
 
     sort(sortBy: string,sortDirection: string) {
-      this.categories$=this.service.getCategoryList(undefined,sortBy,sortDirection,this.pageNumber,this.pageSize);
+      this.categories$=this.service.getCategoryList(undefined,sortBy,sortDirection,this.lastVisible,this.pageSize);
     }
 
     getPage(pageNumber: number) {
-      this.pageNumber=pageNumber;
-      this.categories$=this.service.getCategoryList(undefined,undefined,undefined,pageNumber,this.pageSize);
+      //this.pageNumber=pageNumber;
+      this.categories$=this.service.getCategoryList(undefined,undefined,undefined,this.lastVisible,this.pageSize);
 
     }
 
     getPrevPage() {
-      if(this.pageNumber-1<1){
-        return;
-      }
-      this.pageNumber-=1;
-      this.categories$=this.service.getCategoryList(undefined,undefined,undefined,this.pageNumber,this.pageSize);
+      // if(this.pageNumber-1<1){
+      //   return;
+      // }
+      //this.pageNumber-=1;
+      this.categories$=this.service.getCategoryList(undefined,undefined,undefined,this.lastVisible,this.pageSize);
 
       }
 
 
       getNextPage() {
 
-        if(this.pageNumber+1>this.list.length){
-          return;
-        }
-        this.pageNumber+=1;
-        this.categories$=this.service.getCategoryList(undefined,undefined,undefined,this.pageNumber,this.pageSize);
+        // if(this.pageNumber+1>this.list.length){
+        //   return;
+        // }
+        //this.pageNumber+=1;
+        this.categories$=this.service.getCategoryList(undefined,undefined,undefined,this.lastVisible,this.pageSize);
   
       }
 

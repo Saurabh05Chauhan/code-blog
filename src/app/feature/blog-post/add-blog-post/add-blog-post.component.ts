@@ -11,13 +11,14 @@ import { CategoryService } from '../../Category/Services/category.service';
 import { category } from '../../Category/Models/category';
 import { ImageSelectorComponent } from "../../../shared/components/image-selector/image-selector.component";
 import { ImageService } from '../../../shared/components/image-selector/image.service';
+import { NgxLoadingModule } from 'ngx-loading';
 
 @Component({
     selector: 'app-add-blog-post',
     standalone: true,
     templateUrl: './add-blog-post.component.html',
     styleUrl: './add-blog-post.component.css',
-    imports: [FormsModule, DatePipe, MarkdownModule, CommonModule, ImageSelectorComponent]
+    imports: [FormsModule, DatePipe, MarkdownModule, CommonModule, ImageSelectorComponent,NgxLoadingModule]
 })
 export class AddBlogPostComponent implements OnInit, OnDestroy {
   model:AddBlogPost;
@@ -25,17 +26,18 @@ export class AddBlogPostComponent implements OnInit, OnDestroy {
   categories$?:Observable<category[]>;
   isImageSelectorVisible:boolean=false;
   imageSelected:Subscription | undefined;
+loading: boolean=false;
   constructor(private service:BlogPostService,private router:Router,private category:CategoryService,private imgService:ImageService){
     this.model={
-      title:"",
-    shortDescription:"",
-    content:"",
-    featuredImageUrl:"",
-    urlHandle:"",
-    author:"",
-    publishedDate:new Date(),
-    isVisible:true,
-    categories:[]
+      Title:"",
+    ShortDescription:"",
+    Content:"",
+    FeaturedImageURL:"",
+    UrlHandle:"",
+    Author:"",
+    PublishedDate:new Date(),
+    IsVisible:true,
+    Categories:[]
 
     }
   }
@@ -44,7 +46,7 @@ export class AddBlogPostComponent implements OnInit, OnDestroy {
     this.imageSelected=this.imgService.onSelectImage().subscribe({
       next:(res)=>{
         if(this.model){
-          this.model.featuredImageUrl=res;
+          this.model.FeaturedImageURL=res;
           this.openImageSelector();
         }
       }
@@ -56,10 +58,11 @@ export class AddBlogPostComponent implements OnInit, OnDestroy {
     }
 
   onSubmit() {
-    this.blogPost=this.service.CreateBlogPost(this.model).subscribe({
-      next:(res)=>{
+    this.loading=true;
+    this.blogPost=this.service.CreateBlogPost(this.model).subscribe((res)=>{
+        this.loading=false;
         this.router.navigateByUrl('/admin/blogposts');
-      }
+      
     })
     }
 

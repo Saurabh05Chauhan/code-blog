@@ -17,8 +17,8 @@ model: AddCategoryRequest;
 addCategory?:Subscription;
   constructor(private service:CategoryService,private router:Router) {
     this.model={
-      urlHandle:"",
-      name:""
+      UrlHandle:"",
+      Name:""
     }
     
   }

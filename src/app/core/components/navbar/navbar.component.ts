@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { SignalService } from '../../../shared/service/signal.service';
 import { CookieService } from 'ngx-cookie';
+import { AuthService } from '../../../feature/auth/services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -13,7 +14,7 @@ import { CookieService } from 'ngx-cookie';
 export class NavbarComponent implements OnInit {
   user:any;
 
-  constructor(public signal:SignalService,private cookieService:CookieService,private router:Router){}
+  constructor(public signal:SignalService,private cookieService:CookieService,private router:Router,private auth:AuthService){}
   ngOnInit(): void {
     debugger
     this.user=this.signal.Roles;
@@ -21,12 +22,7 @@ export class NavbarComponent implements OnInit {
 
   LogOut() {
     debugger
-    this.signal.Login(false);
-    this.cookieService.remove('Authorization');
-    localStorage.removeItem('roles');
-    localStorage.removeItem('userName');
-    //localStorage.removeItem('token');
-    this.router.navigateByUrl('/login');
-
+    //this.signal.Login(false);
+    this.auth.signOut();
     }
 }

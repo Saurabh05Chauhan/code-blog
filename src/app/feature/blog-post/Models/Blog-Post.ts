@@ -2,14 +2,14 @@ import { category } from "../../Category/Models/category";
 
 export interface BlogPost
 {
-    id:string,
-    title:string;
-    shortDescription:string;
-    content:string;
-    featuredImageURL:string;
-    urlHandle:string;
-    author:string;
-    publishedDate:Date;
-    isVisible:boolean;
-    categories: category[];
+    Id:string,
+    Title:string;
+    ShortDescription:string;
+    Content:string;
+    FeaturedImageURL:string;
+    UrlHandle:string;
+    Author:string;
+    PublishedDate:Date;
+    IsVisible:boolean;
+    Categories: category[];
 }

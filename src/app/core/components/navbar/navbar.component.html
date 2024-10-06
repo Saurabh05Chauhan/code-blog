@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme="dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Code Blog</a>
+      <a class="navbar-brand" href="#" style="font-family: fantasy;">My Code <span style="color: red;">Blog</span></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -9,7 +9,7 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#">Home</a>
           </li>
-          <!-- @if(this.signal.LoginStatus()=='true' && this.signal.Roles?.includes('Writer')){ -->
+          @if(this.signal.LoginStatus==true && this.signal.Roles){
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Admin
@@ -19,23 +19,31 @@
                 <li><a class="dropdown-item" [routerLink]="['/admin/blogposts']">BlogPosts</a></li>
               </ul>
             </li>
-          <!-- } -->
+           } 
           
         </ul>
 
         
         
       </div>
-      <!-- @if(this.signal.LoginStatus()=='false'){
-        <div class="d-flex">
+      @if(this.signal.LoginStatus==false){
+        <!-- <div class="d-flex">
           <a [routerLink]="['/login']" class="btn btn-primary">Login</a>
-        </div>
+        </div> -->
       }
       @else{
-        <div class="d-flex align-items-center">
-          <span>{{this.signal.User}}</span>
-          <a class="btn btn-primary ms-3" (click)="LogOut()" >Logout</a>
-        </div>
-      } -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: whitesmoke;">
+            {{this.signal.User}}
+          </a>
+          <ul class="dropdown-menu">
+            <!-- <li><a class="dropdown-item" [routerLink]="['/admin/categories']">Category</a></li> -->
+            <li><a style="color: whitesmoke; text-decoration: none;" class="ms-3" (click)="LogOut()" >Logout</a></li>
+          </ul>
+        </li>
+      }
+      <div>
+        &nbsp;
+      </div>
     </div>
   </nav>

@@ -37,6 +37,6 @@ export const routes: Routes = [
         path:'admin/blogposts/:id',component:EditBlogPostComponent,canActivate:[AuthGuardService]
     },
     {
-        // path:'login',component:LoginComponent
+        path:'login',component:LoginComponent
     }
 ];

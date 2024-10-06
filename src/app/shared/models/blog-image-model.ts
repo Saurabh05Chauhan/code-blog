@@ -1,7 +1,7 @@
 export interface BlogImage{
-    id:string,
-    fileName:string,
-    title:string,
-    fileExtension:string,
-    url:string
+    Id:string,
+    FileName:string,
+    Title:string,
+    FileExtension:string,
+    Url:string
 }

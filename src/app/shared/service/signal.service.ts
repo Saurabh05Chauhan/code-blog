@@ -7,25 +7,38 @@ export class SignalService {
 
   constructor() { }
 
-  public _isLoggedIn:Signal<string|null>= signal('false');
-
+  //public _isLoggedIn?:'';
+  roleAdmin='25dfdf7c-1f0a-493a-bb8f-5a4e39aea87e';
   get LoginStatus() {
-    this._isLoggedIn=signal(localStorage.getItem('token'));
-    return this._isLoggedIn;
+    //this._isLoggedIn=localStorage.getItem('userToken');
+    if(localStorage.getItem('userToken')){
+      return true;
+    }
+    else{
+      return false;
+    }
+   
   }
 
-  Login(flag:any)
-  {
-    localStorage.setItem('token',flag);
-    this._isLoggedIn=signal(localStorage.getItem('token'));
-    console.log("set",this._isLoggedIn);
-  }
+  // Login(flag:any)
+  // {
+  //   //localStorage.setItem('token',flag);
+  //   this._isLoggedIn=signal(localStorage.getItem('userToken'));
+  //   //console.log("set",this._isLoggedIn);
+  // }
 
   get Roles(){
-    return localStorage.getItem('roles');
+    var role=localStorage.getItem('userRole');
+    if(role==this.roleAdmin){
+      return true;
+    }
+    else{
+      return false;
+    }
   }
 
   get User(){
-    return localStorage.getItem('userName');
+    var user= localStorage.getItem('userName');
+    return user;
   }
 }

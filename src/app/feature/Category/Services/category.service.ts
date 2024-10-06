@@ -19,7 +19,7 @@ export class CategoryService {
     query?:string,
     sortBy?:string,
     sortDirection?:string,
-    pageNumber?:number,
+    lastVisible?:string,
     pageSize?:number
   ):Observable<category[]>{
     
@@ -37,8 +37,8 @@ export class CategoryService {
       params=params.set('sortDirection',sortDirection);
     }
 
-    if(pageNumber){
-       params=params.set('pageNumber',pageNumber);
+    if(lastVisible){
+       params=params.set('lastVisible',lastVisible);
     }
 
     if(pageSize){

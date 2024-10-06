@@ -5,25 +5,14 @@ import { CookieService } from 'ngx-cookie';
 
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
-  
+  const token = localStorage.getItem('userToken');
 
-  if(req.method==='POST' || req.method==='PUT'|| req.method==='DELETE'){
-    const cookieService = inject(CookieService);
-    
-    //Clone the request and add the authorization header
-      const authReq = req.clone({
-      setHeaders: {
-        Authorization: `${cookieService.get('Authorization')}`
-      }
-    });
-  return next(authReq);
-
-  }
-  else{
-    return next(req);
-
-  }
-  
-
-  // Pass the cloned request with the updated header to the next handler
+    if (token) {
+      const cloned = req.clone({
+        headers: req.headers.set('Authorization', `Bearer ${token}`)
+      });
+      return next(cloned);
+    } else {
+      return next(req);
+    }
 };

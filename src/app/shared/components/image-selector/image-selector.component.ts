@@ -39,12 +39,9 @@ onFileUploadChange($event: Event):void {
 
 uploadImage() :void{
  if(this.file && this.fileName!='' && this.title!=''){
-  this.imageSub=this.imageService.uploadImage(this.file,this.fileName,this.title).subscribe({
-    next:(res)=>{
-      this.imageUploadForm?.reset();
+  this.imageSub=this.imageService.uploadImage(this.file,this.fileName,this.title).subscribe((res)=>{
+    this.imageUploadForm?.reset();
       this.getImages();
-
-    }
   });
  }
   }

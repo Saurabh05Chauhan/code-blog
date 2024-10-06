@@ -4,23 +4,30 @@ import { Observable } from 'rxjs';
 import { BlogPost } from '../../blog-post/Models/Blog-Post';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
-
+import { NgxLoadingModule } from "ngx-loading";
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule,RouterLink],
+  imports: [CommonModule,RouterLink,NgxLoadingModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit {
-   blogs$?:Observable<BlogPost[]>;
+   blogs$?:BlogPost[];
+  loading: boolean=true;
   constructor(private blogService:BlogPostService, ) {
     
     
   }
 
   ngOnInit(): void {
-    this.blogs$=this.blogService.GetBlogPost();
+    debugger
+    this.loading=true;
+    this.blogService.GetBlogPost().subscribe((res)=>{
+      this.blogs$=res;
+      this.loading=false;
+    });
+    
   }
 
 }

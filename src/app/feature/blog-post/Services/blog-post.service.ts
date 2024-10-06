@@ -26,7 +26,7 @@ export class BlogPostService {
   }
 
   GetBlogPostByURL(url?:string):Observable<BlogPost>{
-    return this.client.get<BlogPost>(this.API_URL+'BlogPost/'+url);
+    return this.client.get<BlogPost>(this.API_URL+'BlogPost/burl/'+url);
   }
 
   UpdateBlogPost(model:EditBlogPost):Observable<BlogPost>{

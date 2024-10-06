@@ -17,43 +17,47 @@ import { SignalService } from '../../../shared/service/signal.service';
   styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit{
-    model:LoginRequest;
-    login$?:Observable<LoginResponse>;
+    //model:LoginRequest;
+    //login$?:Observable<LoginResponse>;
     options:CookieOptions | undefined;
     constructor(private authService:AuthService,public cookieservice:CookieService,private router:Router,private signalService:SignalService) {
-      this.model={
-        email:'',
-        password:''
-      }
-      this.options={
-        path:'/',
-        expires:undefined,
-        domain:undefined,
-        secure:true,
-        sameSite:'strict'
-      }
+      // this.model={
+      //   email:'',
+      //   password:''
+      // }
+      // this.options={
+      //   path:'/',
+      //   expires:undefined,
+      //   domain:undefined,
+      //   secure:true,
+      //   sameSite:'strict'
+      // }
 
       
     }
   ngOnInit(): void {
-    console.log(this.signalService.LoginStatus())
+    //console.log(this.signalService.LoginStatus())
+  }
+
+  googleSignIn() {
+    this.authService.googleSignIn();
   }
 
     saveTokenCookie(token :string):void{
 
     }
 
-    onLoginSubmit():void {
-      this.authService.login(this.model).subscribe({
-        next:(value) =>{
-          this.cookieservice.put('Authorization',`Bearer ${value.token}`,this.options);
-          this.signalService.Login(true);
-          this.authService.setUser(value.email,value.roles);
-          this.router.navigateByUrl('/');
+    // onLoginSubmit():void {
+    //   this.authService.login(this.model).subscribe({
+    //     next:(value) =>{
+    //       this.cookieservice.put('Authorization',`Bearer ${value.token}`,this.options);
+    //       this.signalService.Login(true);
+    //       this.authService.setUser(value.email,value.roles);
+    //       this.router.navigateByUrl('/');
           
-        },
-      });
-      }
+    //     },
+    //   });
+    //   }
 
     
 }
