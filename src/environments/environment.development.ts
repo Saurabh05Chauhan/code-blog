@@ -1,6 +1,6 @@
 export const environment = {
     production: true,
-    apiBaseUrl:'http://localhost:3000/api/',
+    apiBaseUrl:'https://codeblogapi.netlify.app/api/',
     firebaseConfig:{
         apiKey: "AIzaSyBmBQVB-kcA7IavBRMDrIgGzRBgb86fpi8",
     authDomain: "mycode-blog.firebaseapp.com",

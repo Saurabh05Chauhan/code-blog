@@ -1,6 +1,6 @@
 export const environment = {
     production: false,
-    apiBaseUrl:'https://codeblogapidev-d8cgcxamgaawcsdt.canadacentral-01.azurewebsites.net/api/',
+    apiBaseUrl:'https://codeblogapi.netlify.app/api/',
     firebaseConfig:{
         apiKey: "AIzaSyBmBQVB-kcA7IavBRMDrIgGzRBgb86fpi8",
     authDomain: "mycode-blog.firebaseapp.com",
